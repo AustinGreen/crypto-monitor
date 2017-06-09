@@ -3,16 +3,30 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      price: 0
+    };
+    this.fetchPrice = this.fetchPrice.bind(this);
+  }
+
+  fetchPrice() {
+    fetch('https://api.lionshare.capital/api/prices')
+      .then(response => response.json())
+      .then(result => this.setState({ price: result.data.BTC[12] }));
+    console.log('Price Updated');
+  }
+
+  componentDidMount() {
+    this.fetchPrice();
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <p>{`The price of bitcoin is ${this.state.price}`}</p>
+        <button onClick={() => this.fetchPrice()}>Get</button>
       </div>
     );
   }

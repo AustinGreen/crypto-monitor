@@ -1,4 +1,4 @@
-The ultimate test of your front-end ability. After this you can move on to the Node course.
+The ultimate test of your front-end ability. After this you can move on to the Node course. Think of this like your front-end final exam.
 
 Build an app using:
 

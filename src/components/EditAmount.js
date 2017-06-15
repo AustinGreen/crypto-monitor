@@ -2,18 +2,19 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { editAmount } from '../actions';
 
-const EditAmount = ({ dispatch, amounts }) => {
+let EditAmount = ({ dispatch, amounts }) => {
+  console.log(amounts);
   let input;
-  console.log(parseInt(amounts[5].amount));
   return (
     <div>
       <form
         onSubmit={e => {
           e.preventDefault();
-          if (!input.value.trim()) {
+          if (!parseFloat(input.value)) {
             return;
           }
-          dispatch(editAmount(input.value));
+          const amount = parseFloat(input.value);
+          dispatch(editAmount(amount));
           input.value = '';
         }}
       >
@@ -26,7 +27,7 @@ const EditAmount = ({ dispatch, amounts }) => {
           Update Amount
         </button>
       </form>
-      <p>{`I own bitcoin(s).`}</p>
+      <p>{`I own ${amounts.BTC} bitcoin(s).`}</p>
     </div>
   );
 };
@@ -35,10 +36,10 @@ const mapStateToProps = state => ({
   amounts: state.amounts
 });
 
-export const VisibleTodoList = connect(mapStateToProps)(EditAmount);
+EditAmount = connect(mapStateToProps, null)(EditAmount);
 
 EditAmount.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
-export default connect()(EditAmount);
+export default EditAmount;

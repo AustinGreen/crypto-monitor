@@ -2,18 +2,18 @@ const amount = (state, action) => {
   switch (action.type) {
     case 'EDIT_AMOUNT':
       return {
-        id: action.id,
-        amount: action.amount
+        BTC: action.amount
       };
     default:
       return state;
   }
 };
 
-const amounts = (state = [], action) => {
+const amounts = (state = {}, action) => {
   switch (action.type) {
     case 'EDIT_AMOUNT':
-      return [...state, amount(undefined, action)];
+      const updatedAmounts = Object.assign(state, amount(undefined, action));
+      return updatedAmounts;
     default:
       return state;
   }

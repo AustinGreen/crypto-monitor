@@ -1,10 +1,10 @@
 import React from 'react';
 import Footer from './Footer';
-import EditAmount, { VisibleTodoList } from './EditAmount';
+import EditAmount from './EditAmount';
 
 const App = () =>
   <div>
-    <VisibleTodoList />
+    <EditAmount />
     {/* <Footer /> */}
   </div>;
 

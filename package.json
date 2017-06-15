@@ -4,8 +4,13 @@
   "private": true,
   "dependencies": {
     "bulma": "^0.4.2",
+    "lodash": "^4.17.4",
+    "node-uuid": "^1.4.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-redux": "^5.0.5",
+    "react-router": "^4.1.1",
+    "redux": "^3.6.0",
     "styled-components": "^2.1.0"
   },
   "devDependencies": {

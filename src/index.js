@@ -1,8 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { render } from 'react-dom';
+import Root from './components/Root';
+import configureStore from './configureStore';
 import registerServiceWorker from './registerServiceWorker';
 import 'bulma/css/bulma.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = configureStore();
+render(<Root store={store} />, document.getElementById('root'));
 registerServiceWorker();

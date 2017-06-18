@@ -2,6 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { toggleEdit } from '../actions';
 
-const EditButton = ({ dispatch }) => <a onClick={() => dispatch(toggleEdit())}>Edit</a>;
+const EditButton = ({ dispatch, editState }) =>
+  <a onClick={() => dispatch(toggleEdit())}>{editState === 'READ' ? 'Edit' : 'Save'}</a>;
 
-export default connect()(EditButton);
+const mapStateToProps = state => ({
+  editState: state.states
+});
+
+export default connect(mapStateToProps, null)(EditButton);

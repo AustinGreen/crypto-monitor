@@ -18,18 +18,19 @@ let EditAmount = ({ dispatch, currencyAmounts, name, editState }) => {
                 }
                 const amount = parseFloat(input.value);
                 dispatch(editAmount(amount, name));
-                input.value = '';
               }}
             >
               <div className="field has-addons" style={{ justifyContent: 'center' }}>
-                <p className="control">
+                <p className="control has-icons-right">
                   <InputField
                     white
+                    defaultValue={currencyAmounts.find(a => a.name === name).amount}
                     placeholder={`0 ${name}`}
                     innerRef={node => {
                       input = node;
                     }}
                   />
+                  <span className="icon is-right">{name}</span>
                 </p>
               </div>
             </form>}

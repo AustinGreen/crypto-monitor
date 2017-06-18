@@ -6,7 +6,7 @@ const EditButton = ({ dispatch, editState }) =>
   <a onClick={() => dispatch(toggleEdit())}>{editState === 'READ' ? 'Edit' : 'Save'}</a>;
 
 const mapStateToProps = state => ({
-  editState: state.states
+  currencyAmounts: state.amounts
 });
 
 export default connect(mapStateToProps, null)(EditButton);

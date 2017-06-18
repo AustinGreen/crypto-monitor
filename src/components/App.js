@@ -1,21 +1,27 @@
 import React from 'react';
 import EditAmount from './EditAmount';
 import EditButton from './EditButton';
+import Prices from './Prices';
 import { toggleEdit } from '../actions';
 
 const App = ({ store }) =>
   <div>
     <div>
-      <section className="hero is-dark is-fullheight">
+      <section className="hero is-dark">
         <div className="hero-body">
-          <div className="container has-text-centered">
-            <div className="column">
-              <EditButton />
+          <div className="container">
+            <div className="columns">
+              <div className="column">
+                <EditButton />
+              </div>
+              {store
+                .getState()
+                .amounts.map(amount => <EditAmount fullName={amount.fullName} name={amount.name} key={amount.name} />)}
             </div>
-            {store.getState().amounts.map(amount => <EditAmount name={amount.name} key={amount.name} />)}
           </div>
         </div>
       </section>
+      <Prices />
     </div>
   </div>;
 

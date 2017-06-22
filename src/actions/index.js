@@ -9,3 +9,8 @@ export const editAmount = (amount, name) => ({
 export const toggleEdit = () => ({
   type: 'TOGGLE_EDIT'
 });
+
+export const save = amounts => ({
+  type: 'SAVE_AMOUNTS',
+  amounts
+});

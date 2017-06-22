@@ -1,6 +1,7 @@
 import React from 'react';
 import EditAmount from './EditAmount';
 import EditButton from './EditButton';
+import SaveButton from './SaveButton';
 import Prices from './Prices';
 import { toggleEdit } from '../actions';
 
@@ -13,6 +14,9 @@ const App = ({ store }) =>
             <div className="columns">
               <div className="column">
                 <EditButton />
+              </div>
+              <div className="column">
+                <SaveButton />
               </div>
               {store
                 .getState()

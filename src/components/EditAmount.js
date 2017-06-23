@@ -6,7 +6,7 @@ import { InputField } from './shared/InputField';
 let EditAmount = ({ dispatch, currencyAmounts, fullName, name, editState }) => {
   let input;
   return (
-    <div className="column">
+    <div className="column is-half-mobile">
       {editState === 'READ'
         ? <div>
             <p className="title is-5">{fullName}</p>

@@ -1,6 +1,6 @@
 import React from 'react';
 import EditAmount from './EditAmount';
-import Button from './Button';
+import UpdateStateButton from './UpdateStateButton';
 import Prices from './Prices';
 import { toggleEdit } from '../actions';
 
@@ -9,12 +9,12 @@ const App = ({ store }) =>
       <section className="hero is-dark">
         <div className="hero-body">
           <div className="container">
-            <div className="columns">
-              <div className="column">
-                <Button buttonType="Edit" />
+            <div className="columns is-multiline is-mobile">
+              <div className="column is-half-mobile">
+                <UpdateStateButton buttonType="Edit" />
               </div>
-              <div className="column">
-                <Button buttonType="Save" />
+              <div className="column is-half-mobile">
+                <UpdateStateButton buttonType="Save" />
               </div>
               {store
                 .getState()

@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { save, toggleEdit } from '../actions';
+import { Button } from './shared/Button';
 
-const Button = ({ dispatch, editState, buttonType }) =>
+const UpdateStateButton = ({ dispatch, editState, buttonType }) =>
   buttonType === 'Save' 
-    ? <a
+    ? <Button
+      uppercase
       onClick={() => {
         const amounts = [...document.querySelectorAll('input')].map(a => parseFloat(a.value));
         dispatch(save(amounts));
@@ -12,11 +14,11 @@ const Button = ({ dispatch, editState, buttonType }) =>
       }}
     >
       {editState === 'READ' ? '' : 'Save'}
-    </a>
-    : <a onClick={() => dispatch(toggleEdit())}>{editState === 'READ' ? 'Edit' : 'Cancel'}</a>;
+    </Button>
+    : <Button uppercase onClick={() => dispatch(toggleEdit())}>{editState === 'READ' ? 'Edit' : 'Cancel'}</Button>;
 
 const mapStateToProps = state => ({
   editState: state.states
 });
 
-export default connect(mapStateToProps, null)(Button);
+export default connect(mapStateToProps, null)(UpdateStateButton);

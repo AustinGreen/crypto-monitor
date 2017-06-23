@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bulma": "^0.4.2",
+    "currency-formatter": "^1.2.1",
     "lodash": "^4.17.4",
     "node-uuid": "^1.4.8",
     "react": "^15.5.4",

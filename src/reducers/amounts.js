@@ -33,7 +33,6 @@ const amounts = (
     case 'EDIT_AMOUNT':
       return state.map(a => amount(a, action));
     case 'SAVE_AMOUNTS':
-      console.log(action);
       return state.map((a, i) => amount(a, action, i));
     default:
       return state;

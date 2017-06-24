@@ -1,7 +1,7 @@
 import React from 'react';
 import EditAmount from './EditAmount';
 import UpdateStateButton from './UpdateStateButton';
-import Prices from './Prices';
+import Dashboard from './Dashboard';
 
 const App = ({ store }) =>
   <div>
@@ -22,7 +22,7 @@ const App = ({ store }) =>
         </div>
       </div>
     </section>
-    <Prices />
+    <Dashboard />
   </div>;
 
 export default App;

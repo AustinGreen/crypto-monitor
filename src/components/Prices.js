@@ -12,25 +12,46 @@ class Prices extends Component {
     const currencyString = currencyAmounts.map(a => a.name).toString();
     fetch(`https://min-api.cryptocompare.com/data/price?fsym=USD&tsyms=${currencyString}`)
       .then(response => response.json())
-      .then(result =>
-        this.props.receivePrices(
-          currencyAmounts.map(a => currencyFormatter.format(1 / result[a.name], { code: 'USD' }))
-        )
-      );
+      .then(result => this.props.receivePrices(currencyAmounts.map(a => 1 / result[a.name])));
   }
 
   render() {
     console.log(this.props);
     const { currencyAmounts } = this.props;
     return (
-      <section className="section" style={{ backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
-        <div className="container">
-          <h1 className="title">Prices</h1>
-          <ul>
-            {currencyAmounts.map((amount, i) => <li key={amount.name}>{amount.name}: {this.props.prices[i]}</li>)}
-          </ul>
+      <div className="columns" style={{ backgroundColor: '#f5f5f5' }}>
+        <div className="column">
+          <section className="section" style={{ backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
+            <h1 className="title">Prices</h1>
+            <ul>
+              {currencyAmounts.map((amount, i) =>
+                <li key={amount.name}>
+                  {amount.name}: {currencyFormatter.format(this.props.prices[i], { code: 'USD' })}
+                </li>
+              )}
+            </ul>
+          </section>
         </div>
-      </section>
+        <div className="column">
+          <section className="section" style={{ backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
+            <h1 className="title">Portfolio</h1>
+            <ul>
+              {currencyAmounts.map((amount, i) =>
+                <li key={amount.name}>
+                  {amount.name}: {currencyFormatter.format(amount.amount * this.props.prices[i], { code: 'USD' })}
+                </li>
+              )}
+              <li>
+                Total:{' '}
+                {currencyFormatter.format(
+                  currencyAmounts.map((a, i) => a.amount * this.props.prices[i]).reduce((a, b) => a + b),
+                  { code: 'USD' }
+                )}
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
     );
   }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import currencyFormatter from 'currency-formatter';
 
 const Prices = ({ currencyAmounts, prices }) =>
-  <section className="section" style={{ backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
+  <section className="section">
     <h1 className="title">Prices</h1>
     <ul>
       {currencyAmounts.map((amount, i) =>

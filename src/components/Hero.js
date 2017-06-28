@@ -1,5 +1,5 @@
 import React from 'react';
-import EditAmount from './EditAmount';
+import Amount from './Amount';
 import UpdateStateButton from './UpdateStateButton';
 
 const Hero = ({ store }) =>
@@ -15,7 +15,7 @@ const Hero = ({ store }) =>
           </div>
           {store
             .getState()
-            .amounts.map(amount => <EditAmount fullName={amount.fullName} name={amount.name} key={amount.name} />)}
+            .amounts.map(amount => <Amount fullName={amount.fullName} name={amount.name} key={amount.name} />)}
         </div>
       </div>
     </div>

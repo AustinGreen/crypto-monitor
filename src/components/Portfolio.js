@@ -1,22 +1,27 @@
 import React from 'react';
 import currencyFormatter from 'currency-formatter';
+import { CurrencyListItem } from './shared/CurrencyListItem';
+import { FlexContainer } from './shared/FlexContainer';
 
 const Portfolio = ({ currencyAmounts, prices }) =>
-  <section className="section" style={{ backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
-    <h1 className="title">Portfolio</h1>
-    <ul>
+  <section className="section">
+    <h1 className="title has-text-centered">Portfolio</h1>
+    <div>
       {currencyAmounts.map((amount, i) =>
-        <li key={amount.name}>
-          {amount.name}: {currencyFormatter.format(amount.amount * prices[i], { code: 'USD' })}
-        </li>
+        <FlexContainer key={amount.name}>
+          <CurrencyListItem {...amount} key={amount.name}>
+            {amount.fullName}
+          </CurrencyListItem>
+          <span>{currencyFormatter.format(amount.amount * prices[i], { code: 'USD' })}</span>
+        </FlexContainer>
       )}
-      <li>
+      <p>
         Total:{' '}
         {currencyFormatter.format(currencyAmounts.map((a, i) => a.amount * prices[i]).reduce((a, b) => a + b), {
           code: 'USD'
         })}
-      </li>
-    </ul>
+      </p>
+    </div>
   </section>;
 
 export default Portfolio;

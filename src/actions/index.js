@@ -15,6 +15,11 @@ export const toggleEdit = () => ({
   type: 'TOGGLE_EDIT'
 });
 
+export const toggleView = view => ({
+  type: 'TOGGLE_VIEW',
+  view
+});
+
 export const save = amounts => ({
   type: 'SAVE_AMOUNTS',
   amounts

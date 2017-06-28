@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import currencyFormatter from 'currency-formatter';
 import { connect } from 'react-redux';
-import { receivePrices } from '../actions';
+import { receivePrices, toggleView } from '../actions';
+import { Switch } from './shared/Switch';
 import Prices from './Prices';
 import Portfolio from './Portfolio';
 
@@ -18,14 +19,37 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { currencyAmounts, prices } = this.props;
+    const { currencyAmounts, prices, toggleView, view } = this.props;
     return (
-      <div className="columns" style={{ backgroundColor: '#f5f5f5' }}>
-        <div className="column">
-          <Prices currencyAmounts={currencyAmounts} prices={prices} />
-        </div>
-        <div className="column">
-          <Portfolio currencyAmounts={currencyAmounts} prices={prices} />
+      <div className="container">
+        <Switch className="field has-addons">
+          <p className="control">
+            <a
+              className={view === 'PRICES' ? 'button is-active' : 'button'}
+              onClick={() => {
+                toggleView('PRICES');
+              }}
+            >
+              <span>Prices</span>
+            </a>
+          </p>
+          <p className="control">
+            <a
+              className={view === 'PRICES' ? 'button' : 'button is-active'}
+              onClick={() => {
+                toggleView('PORTFOLIO');
+              }}
+            >
+              <span>Portfolio</span>
+            </a>
+          </p>
+        </Switch>
+        <div className="columns">
+          <div className="column is-half is-offset-one-quarter">
+            {view === 'PRICES'
+              ? <Prices currencyAmounts={currencyAmounts} prices={prices} />
+              : <Portfolio currencyAmounts={currencyAmounts} prices={prices} />}
+          </div>
         </div>
       </div>
     );
@@ -34,7 +58,8 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
   currencyAmounts: state.amounts,
-  prices: state.prices
+  prices: state.prices,
+  view: state.views
 });
 
-export default connect(mapStateToProps, { receivePrices })(Dashboard);
+export default connect(mapStateToProps, { receivePrices, toggleView })(Dashboard);

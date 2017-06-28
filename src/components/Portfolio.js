@@ -5,7 +5,12 @@ import { FlexContainer } from './shared/FlexContainer';
 
 const Portfolio = ({ currencyAmounts, prices }) =>
   <section className="section">
-    <h1 className="title has-text-centered">Portfolio</h1>
+    <h1 className="title has-text-centered">
+      Total Portfolio:{' '}
+      {currencyFormatter.format(currencyAmounts.map((a, i) => a.amount * prices[i]).reduce((a, b) => a + b), {
+        code: 'USD'
+      })}
+    </h1>
     <div>
       {currencyAmounts.map((amount, i) =>
         <FlexContainer key={amount.name}>
@@ -15,12 +20,6 @@ const Portfolio = ({ currencyAmounts, prices }) =>
           <span>{currencyFormatter.format(amount.amount * prices[i], { code: 'USD' })}</span>
         </FlexContainer>
       )}
-      <p>
-        Total:{' '}
-        {currencyFormatter.format(currencyAmounts.map((a, i) => a.amount * prices[i]).reduce((a, b) => a + b), {
-          code: 'USD'
-        })}
-      </p>
     </div>
   </section>;
 

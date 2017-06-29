@@ -12,10 +12,11 @@ class Dashboard extends Component {
   }
 
   fetchPrices(currencyAmounts) {
+    const { receivePrices } = this.props;
     const currencyString = currencyAmounts.map(a => a.name).toString();
     fetch(`https://min-api.cryptocompare.com/data/price?fsym=USD&tsyms=${currencyString}`)
       .then(response => response.json())
-      .then(result => this.props.receivePrices(currencyAmounts.map(a => 1 / result[a.name])));
+      .then(result => receivePrices(currencyAmounts.map(a => 1 / result[a.name])));
   }
 
   render() {
@@ -46,7 +47,7 @@ class Dashboard extends Component {
         </Switch>
         <div className="column is-half is-offset-one-quarter">
           {view === 'PRICES'
-            ? <Prices currencyAmounts={currencyAmounts} prices={prices} />
+            ? <Prices currencyAmounts={currencyAmounts} prices={prices} fetchPrices={this.fetchPrices.bind(this)} />
             : <Portfolio currencyAmounts={currencyAmounts} prices={prices} />}
         </div>
       </div>

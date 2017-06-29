@@ -4,6 +4,7 @@ import Root from './components/Root';
 import configureStore from './configureStore';
 import registerServiceWorker from './registerServiceWorker';
 import 'bulma/css/bulma.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 const store = configureStore();
 render(<Root store={store} />, document.getElementById('root'));

@@ -1,5 +1,9 @@
 # crypto-monitor
 
+## Demo
+
+[Demo Link](https://cryptocurrency-monitor-uhnfufhbzo.now.sh)
+
 ## Running your service worker on your localhost
 
 1. `yarn build`

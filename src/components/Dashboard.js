@@ -44,12 +44,10 @@ class Dashboard extends Component {
             </a>
           </p>
         </Switch>
-        <div className="columns">
-          <div className="column is-half is-offset-one-quarter">
-            {view === 'PRICES'
-              ? <Prices currencyAmounts={currencyAmounts} prices={prices} />
-              : <Portfolio currencyAmounts={currencyAmounts} prices={prices} />}
-          </div>
+        <div className="column is-half is-offset-one-quarter">
+          {view === 'PRICES'
+            ? <Prices currencyAmounts={currencyAmounts} prices={prices} />
+            : <Portfolio currencyAmounts={currencyAmounts} prices={prices} />}
         </div>
       </div>
     );

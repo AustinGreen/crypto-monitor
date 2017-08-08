@@ -2,25 +2,25 @@ import { v4 } from 'node-uuid';
 
 export const receivePrices = response => ({
   type: 'RECEIVE_PRICES',
-  response
+  response,
 });
 
 export const editAmount = (amount, name) => ({
   type: 'EDIT_AMOUNT',
   name,
-  amount
+  amount,
 });
 
 export const toggleEdit = () => ({
-  type: 'TOGGLE_EDIT'
+  type: 'TOGGLE_EDIT',
 });
 
 export const toggleView = view => ({
   type: 'TOGGLE_VIEW',
-  view
+  view,
 });
 
 export const save = amounts => ({
   type: 'SAVE_AMOUNTS',
-  amounts
+  amounts,
 });

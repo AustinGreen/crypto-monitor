@@ -6,12 +6,12 @@ const amount = (state, action, i) => {
       }
       return {
         ...state,
-        amount: action.amount
+        amount: action.amount,
       };
     case 'SAVE_AMOUNTS':
       return {
         ...state,
-        amount: action.amounts[i]
+        amount: action.amounts[i],
       };
     default:
       return state;
@@ -24,10 +24,11 @@ const amounts = (
     { name: 'ETH', amount: 0, fullName: 'Ethereum' },
     { name: 'LTC', amount: 0, fullName: 'Litecoin' },
     { name: 'ZEC', amount: 0, fullName: 'ZCash' },
-    { name: 'ETC', amount: 0, fullName: 'Ethereum Classic' },
-    { name: 'XMR', amount: 0, fullName: 'Monero' }
+    { name: 'ETC', amount: 0, fullName: 'Eth. Classic' },
+    { name: 'XMR', amount: 0, fullName: 'Monero' },
+    { name: 'BCH', amount: 0, fullName: 'Bitcoin Cash' },
   ],
-  action
+  action,
 ) => {
   switch (action.type) {
     case 'EDIT_AMOUNT':

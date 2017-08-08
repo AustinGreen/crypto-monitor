@@ -8,7 +8,7 @@ const Portfolio = ({ currencyAmounts, prices }) =>
     <h1 className="title has-text-centered">
       Total Portfolio:{' '}
       {currencyFormatter.format(currencyAmounts.map((a, i) => a.amount * prices[i]).reduce((a, b) => a + b), {
-        code: 'USD'
+        code: 'USD',
       })}
     </h1>
     <div>
@@ -17,8 +17,10 @@ const Portfolio = ({ currencyAmounts, prices }) =>
           <CurrencyListItem {...amount} key={amount.name}>
             {amount.fullName}
           </CurrencyListItem>
-          <span>{currencyFormatter.format(amount.amount * prices[i], { code: 'USD' })}</span>
-        </FlexContainer>
+          <span>
+            {currencyFormatter.format(amount.amount * prices[i], { code: 'USD' })}
+          </span>
+        </FlexContainer>,
       )}
     </div>
   </section>;

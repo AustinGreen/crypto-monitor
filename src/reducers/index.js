@@ -8,7 +8,7 @@ const portfolioApp = combineReducers({
   amounts,
   states,
   prices,
-  views
+  views,
 });
 
 export default portfolioApp;

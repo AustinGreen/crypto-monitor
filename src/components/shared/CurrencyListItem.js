@@ -17,34 +17,30 @@ export const CurrencyListItem = styled.p`
       props.name === 'BTC' &&
       css`
       background-color: #FF9900;
-    `}
-
-    ${props =>
-      props.name === 'ETH' &&
-      css`
+    `} ${props =>
+        props.name === 'ETH' &&
+        css`
       background-color: #3C3C3D;
-    `}
-
-    ${props =>
-      props.name === 'LTC' &&
-      css`
+    `} ${props =>
+        props.name === 'LTC' &&
+        css`
       background-color: #989898;
-    `}
-    ${props =>
-      props.name === 'ZEC' &&
-      css`
+    `} ${props =>
+        props.name === 'ZEC' &&
+        css`
       background-color: #EEAC57;
-    `}
-    ${props =>
-      props.name === 'ETC' &&
-      css`
+    `} ${props =>
+        props.name === 'ETC' &&
+        css`
       background-color: #53B75C;
-    `}
-    ${props =>
-      props.name === 'XMR' &&
-      css`
+    `} ${props =>
+        props.name === 'XMR' &&
+        css`
       background-color: #CD4A17;
-    `}
+    `} ${props =>
+        props.name === 'BCH' &&
+        css`
+      background-color: #1CAADE;
+    `};
   }
-
 `;

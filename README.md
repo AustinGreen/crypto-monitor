@@ -1,8 +1,8 @@
-# crypto-monitor
+# Crypto Monitor
 
-## Demo
+Use Crypto Monitor to track your cryptocurrency portfolio. All data is saved to local storage.
 
-[Demo Link](https://cryptocurrency-monitor-uhnfufhbzo.now.sh)
+[Demo Link](http://sales-person-compresses-32433.netlify.com/)
 
 ## Running your service worker on your localhost
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import currencyFormatter from 'currency-formatter';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { receivePrices, toggleView } from '../actions';
 import { Switch } from './shared/Switch';
@@ -20,7 +21,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { currencyAmounts, prices, toggleView, view } = this.props;
+    const { currencyAmounts, prices, view } = this.props;
     return (
       <div className="container">
         <Switch className="field has-addons">
@@ -28,7 +29,7 @@ class Dashboard extends Component {
             <a
               className={view === 'PRICES' ? 'button is-active' : 'button'}
               onClick={() => {
-                toggleView('PRICES');
+                this.props.toggleView('PRICES');
               }}
             >
               <span>Prices</span>
@@ -38,7 +39,7 @@ class Dashboard extends Component {
             <a
               className={view === 'PRICES' ? 'button' : 'button is-active'}
               onClick={() => {
-                toggleView('PORTFOLIO');
+                this.props.toggleView('PORTFOLIO');
               }}
             >
               <span>Portfolio</span>
@@ -55,10 +56,24 @@ class Dashboard extends Component {
   }
 }
 
+Dashboard.propTypes = {
+  currencyAmounts: PropTypes.arrayOf(
+    PropTypes.shape({
+      amount: PropTypes.number.isRequired,
+      fullName: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  prices: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  receivePrices: PropTypes.func.isRequired,
+  toggleView: PropTypes.func.isRequired,
+  view: PropTypes.string.isRequired,
+};
+
 const mapStateToProps = state => ({
   currencyAmounts: state.amounts,
   prices: state.prices,
-  view: state.views
+  view: state.views,
 });
 
 export default connect(mapStateToProps, { receivePrices, toggleView })(Dashboard);

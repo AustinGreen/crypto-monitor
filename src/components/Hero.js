@@ -2,7 +2,7 @@ import React from 'react';
 import Amount from './Amount';
 import UpdateStateButton from './UpdateStateButton';
 
-const Hero = ({ store }) =>
+const Hero = ({ amounts }) =>
   <section className="hero is-dark">
     <div className="hero-body">
       <div className="container">
@@ -13,9 +13,7 @@ const Hero = ({ store }) =>
           <div className="column is-half-mobile">
             <UpdateStateButton buttonType="Save" />
           </div>
-          {store
-            .getState()
-            .amounts.map(amount => <Amount fullName={amount.fullName} name={amount.name} key={amount.name} />)}
+          {amounts.map(amount => <Amount fullName={amount.fullName} name={amount.name} key={amount.name} />)}
         </div>
       </div>
     </div>

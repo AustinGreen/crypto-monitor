@@ -1,11 +1,14 @@
 import React from 'react';
 import Hero from './Hero';
 import Dashboard from './Dashboard';
+import { connect } from 'react-redux';
 
-const App = ({ store }) =>
+const App = ({ amounts }) =>
   <div>
-    <Hero store={store} />
+    <Hero amounts={amounts} />
     <Dashboard />
   </div>;
 
-export default App;
+export default connect(state => ({
+  amounts: state.amounts,
+}))(App);

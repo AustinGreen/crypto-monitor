@@ -1,4 +1,4 @@
-import { v4 } from 'node-uuid';
+// import { v4 } from 'node-uuid';
 
 export const receivePrices = response => ({
   type: 'RECEIVE_PRICES',

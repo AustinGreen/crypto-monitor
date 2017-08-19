@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import App from './App';
-// Add react router for prices and portfolio app
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const Root = ({ store }) =>
   <Provider store={store}>
-    <App />
+    <Router>
+      <Route path="/" component={App} />
+    </Router>
   </Provider>;
 
 Root.propTypes = {

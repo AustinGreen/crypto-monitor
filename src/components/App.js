@@ -3,11 +3,18 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Hero from './Hero';
 import Dashboard from './Dashboard';
+import Portfolio from './Portfolio';
+import Prices from './Prices';
+import { Route, Redirect } from 'react-router-dom';
 
 const App = ({ amounts }) =>
   <div>
     <Hero amounts={amounts} />
-    <Dashboard />
+    <Dashboard>
+      <Route exact path="/" render={() => <Redirect to="/prices" />} />
+      <Route path="/prices" />
+      <Route path="/portfolio" />
+    </Dashboard>
   </div>;
 
 App.propTypes = {

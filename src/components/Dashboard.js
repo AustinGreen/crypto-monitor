@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import currencyFormatter from 'currency-formatter';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -6,6 +7,10 @@ import { receivePrices, toggleView } from '../actions';
 import { Switch } from './shared/Switch';
 import Prices from './Prices';
 import Portfolio from './Portfolio';
+
+// {view === 'PRICES'
+//   ? <Prices  />
+//   : }
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -22,34 +27,35 @@ class Dashboard extends Component {
 
   render() {
     const { currencyAmounts, prices, view } = this.props;
+    const children = React.Children.map(this.props.children, child =>
+      React.cloneElement(child, {
+        render: () => {
+          if (child.props.render) {
+            return child;
+          }
+          if (child.props.path.includes('portfolio')) {
+            return <Portfolio currencyAmounts={currencyAmounts} prices={prices} />;
+          }
+          return <Prices currencyAmounts={currencyAmounts} prices={prices} fetchPrices={this.fetchPrices.bind(this)} />;
+        },
+      }),
+    );
     return (
       <div className="container">
         <Switch className="field has-addons">
           <p className="control">
-            <a
-              className={view === 'PRICES' ? 'button is-active' : 'button'}
-              onClick={() => {
-                this.props.toggleView('PRICES');
-              }}
-            >
+            <NavLink className="button" activeClassName="is-active" to="/prices">
               <span>Prices</span>
-            </a>
+            </NavLink>
           </p>
           <p className="control">
-            <a
-              className={view === 'PRICES' ? 'button' : 'button is-active'}
-              onClick={() => {
-                this.props.toggleView('PORTFOLIO');
-              }}
-            >
+            <NavLink className="button" activeClassName="is-active" to="/portfolio">
               <span>Portfolio</span>
-            </a>
+            </NavLink>
           </p>
         </Switch>
         <div className="column is-half is-offset-one-quarter">
-          {view === 'PRICES'
-            ? <Prices currencyAmounts={currencyAmounts} prices={prices} fetchPrices={this.fetchPrices.bind(this)} />
-            : <Portfolio currencyAmounts={currencyAmounts} prices={prices} />}
+          {children}
         </div>
       </div>
     );

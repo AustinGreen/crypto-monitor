@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import currencyFormatter from 'currency-formatter';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { receivePrices, toggleView } from '../actions';
+import { receivePrices } from '../actions';
 import { Switch } from './shared/Switch';
 import Prices from './Prices';
 import Portfolio from './Portfolio';
@@ -30,6 +30,7 @@ class Dashboard extends Component {
     const children = React.Children.map(this.props.children, child =>
       React.cloneElement(child, {
         render: () => {
+          console.log(this.props.children);
           if (child.props.render) {
             return child;
           }
@@ -72,7 +73,6 @@ Dashboard.propTypes = {
   ).isRequired,
   prices: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   receivePrices: PropTypes.func.isRequired,
-  toggleView: PropTypes.func.isRequired,
   view: PropTypes.string.isRequired,
 };
 
@@ -82,4 +82,4 @@ const mapStateToProps = state => ({
   view: state.views,
 });
 
-export default connect(mapStateToProps, { receivePrices, toggleView })(Dashboard);
+export default connect(mapStateToProps, { receivePrices })(Dashboard);

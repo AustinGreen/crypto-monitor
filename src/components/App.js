@@ -5,7 +5,7 @@ import Hero from './Hero';
 import Dashboard from './Dashboard';
 import Portfolio from './Portfolio';
 import Prices from './Prices';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 const App = ({ amounts }) =>
   <div>
@@ -14,6 +14,7 @@ const App = ({ amounts }) =>
       <Route exact path="/" render={() => <Redirect to="/prices" />} />
       <Route path="/prices" />
       <Route path="/portfolio" />
+      <Route render={() => <p>404</p>} />
     </Dashboard>
   </div>;
 

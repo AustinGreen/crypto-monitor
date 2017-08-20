@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Amount from './Amount';
 import UpdateStateButton from './UpdateStateButton';
 
@@ -18,5 +19,15 @@ const Hero = ({ amounts }) =>
       </div>
     </div>
   </section>;
+
+Hero.propTypes = {
+  amounts: PropTypes.arrayOf(
+    PropTypes.shape({
+      amount: PropTypes.number.isRequired,
+      fullName: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
 
 export default Hero;

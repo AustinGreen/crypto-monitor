@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { receivePrices } from '../actions';
-import { Switch } from './shared/Switch';
+import Switch from './shared/Switch';
 import Prices from './Prices';
 import Portfolio from './Portfolio';
 

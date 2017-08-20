@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import currencyFormatter from 'currency-formatter';
-import { CurrencyListItem } from './shared/CurrencyListItem';
-import { FlexContainer } from './shared/FlexContainer';
+import CurrencyListItem from './shared/CurrencyListItem';
+import FlexContainer from './shared/FlexContainer';
 
 const Portfolio = ({ currencyAmounts, prices }) =>
   <section className="section">

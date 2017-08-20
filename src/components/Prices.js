@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import currencyFormatter from 'currency-formatter';
-import { CurrencyListItem } from './shared/CurrencyListItem';
-import { FlexContainer } from './shared/FlexContainer';
-import { receivePrice } from '../actions';
 import FontAwesome from 'react-fontawesome';
+import CurrencyListItem from './shared/CurrencyListItem';
+import FlexContainer from './shared/FlexContainer';
 
 const Prices = ({ currencyAmounts, prices, fetchPrices }) =>
   <section className="section">
@@ -17,15 +17,27 @@ const Prices = ({ currencyAmounts, prices, fetchPrices }) =>
           <span>
             {currencyFormatter.format(prices[i], { code: 'USD' })}
           </span>
-        </FlexContainer>
+        </FlexContainer>,
       )}
     </div>
-    <a className="button is-dark" onClick={() => fetchPrices(currencyAmounts)} style={{ float: 'right' }}>
+    <button className="button is-dark" onClick={() => fetchPrices(currencyAmounts)} style={{ float: 'right' }}>
       <span className="icon">
         <FontAwesome name="refresh" />
       </span>
       <span>Update Prices</span>
-    </a>
+    </button>
   </section>;
+
+Prices.propTypes = {
+  currencyAmounts: PropTypes.arrayOf(
+    PropTypes.shape({
+      amount: PropTypes.number.isRequired,
+      fullName: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  prices: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  fetchPrices: PropTypes.func.isRequired,
+};
 
 export default Prices;

@@ -1,8 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-export const CurrencyListItem = styled.p`
+export default styled.p`
   margin-bottom: 0.5em;
 
   &:before {

@@ -1,8 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-export const InputField = styled.input`
+export default styled.input`
   background-color: transparent;
   border-top: 0;
   border-right: 0;
@@ -36,5 +34,5 @@ export const InputField = styled.input`
     css`
     color: white;
     border-bottom: 3px solid white;
-  `}
+  `};
 `;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { InputField } from './shared/InputField';
+import InputField from './shared/InputField';
 
 const Amount = ({ currencyAmounts, fullName, name, editState }) =>
   <div className="column is-half-mobile">

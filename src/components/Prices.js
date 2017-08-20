@@ -4,9 +4,16 @@ import { CurrencyListItem } from './shared/CurrencyListItem';
 import { FlexContainer } from './shared/FlexContainer';
 import { receivePrice } from '../actions';
 import FontAwesome from 'react-fontawesome';
+import Websocket from 'react-websocket';
+
+const handleData = (data) => {
+  const result = JSON.parse(data);
+  console.log(result);
+};
 
 const Prices = ({ currencyAmounts, prices, fetchPrices }) =>
   <section className="section">
+    <Websocket url="wss://ws.blockchain.info/inv" onMessage={handleData} />
     <h1 className="title has-text-centered">Prices</h1>
     <div>
       {currencyAmounts.map((amount, i) =>
@@ -17,7 +24,7 @@ const Prices = ({ currencyAmounts, prices, fetchPrices }) =>
           <span>
             {currencyFormatter.format(prices[i], { code: 'USD' })}
           </span>
-        </FlexContainer>
+        </FlexContainer>,
       )}
     </div>
     <a className="button is-dark" onClick={() => fetchPrices(currencyAmounts)} style={{ float: 'right' }}>

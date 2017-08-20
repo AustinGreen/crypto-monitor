@@ -8,10 +8,6 @@ import { Switch } from './shared/Switch';
 import Prices from './Prices';
 import Portfolio from './Portfolio';
 
-// {view === 'PRICES'
-//   ? <Prices  />
-//   : }
-
 class Dashboard extends Component {
   componentDidMount() {
     this.fetchPrices(this.props.currencyAmounts);
@@ -26,11 +22,10 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { currencyAmounts, prices, view } = this.props;
+    const { currencyAmounts, prices } = this.props;
     const children = React.Children.map(this.props.children, child =>
       React.cloneElement(child, {
         render: () => {
-          console.log(this.props.children);
           if (child.props.render) {
             return child;
           }
@@ -73,13 +68,11 @@ Dashboard.propTypes = {
   ).isRequired,
   prices: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   receivePrices: PropTypes.func.isRequired,
-  view: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   currencyAmounts: state.amounts,
   prices: state.prices,
-  view: state.views,
 });
 
 export default connect(mapStateToProps, { receivePrices })(Dashboard);

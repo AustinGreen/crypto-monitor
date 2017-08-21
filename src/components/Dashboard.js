@@ -64,6 +64,7 @@ Dashboard.propTypes = {
       name: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  children: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   prices: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   receivePrices: PropTypes.func.isRequired,
 };

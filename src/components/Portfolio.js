@@ -5,19 +5,6 @@ import CurrencyListItem from './shared/CurrencyListItem';
 import FlexContainer from './shared/FlexContainer';
 import { RadialChart } from 'react-vis';
 
-const data = [
-  { x: 0, y: 8 },
-  { x: 1, y: 5 },
-  { x: 2, y: 4 },
-  { x: 3, y: 9 },
-  { x: 4, y: 1 },
-  { x: 5, y: 7 },
-  { x: 6, y: 6 },
-  { x: 7, y: 3 },
-  { x: 8, y: 2 },
-  { x: 9, y: 0 },
-];
-
 let myData = [{ angle: 0 }];
 
 class Portfolio extends Component {
@@ -34,7 +21,7 @@ class Portfolio extends Component {
     const { currencyAmounts, prices } = this.props;
     myData = currencyAmounts.map((amount, i) => ({
       angle: Math.round(amount.amount * prices[i]),
-      label: amount.name,
+      label: amount.fullName,
       color: amount.color,
     }));
     return (

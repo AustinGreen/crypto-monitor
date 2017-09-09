@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { RadialChart } from 'react-vis';
 import PropTypes from 'prop-types';
 import currencyFormatter from 'currency-formatter';
 import CurrencyListItem from './shared/CurrencyListItem';
 import FlexContainer from './shared/FlexContainer';
-import { RadialChart } from 'react-vis';
 
 let myData = [{ angle: 0 }];
 
@@ -21,7 +21,7 @@ class Portfolio extends Component {
     const { currencyAmounts, prices } = this.props;
     myData = currencyAmounts.map((amount, i) => ({
       angle: Math.round(amount.amount * prices[i]),
-      label: amount.fullName,
+      label: amount.name,
       color: amount.color,
     }));
     return (
@@ -29,9 +29,10 @@ class Portfolio extends Component {
         colorDomain={[0, 100]}
         colorRange={[0, 10]}
         colorType="literal"
-        innerRadius={100}
-        radius={140}
+        innerRadius={80}
+        radius={120}
         showLabels
+        labelsAboveChildren
         data={myData}
         width={600}
         height={300}

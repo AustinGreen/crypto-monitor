@@ -4,32 +4,34 @@ import { connect } from 'react-redux';
 import { save, toggleEdit } from '../actions';
 import Button from './shared/Button';
 
-const UpdateStateButton = ({ dispatch, editState, buttonType }) =>
+const UpdateStateButton = ({ editState, buttonType, save, toggleEdit }) => (
   <div>
-    {buttonType === 'Save'
-      ? <Button
+    {buttonType === 'Save' ? (
+      <Button
         uppercase
         onClick={() => {
           const amounts = [...document.querySelectorAll('input')].map(a => parseFloat(a.value));
-          dispatch(save(amounts));
-          dispatch(toggleEdit());
+          save(amounts);
+          toggleEdit();
         }}
       >
         {editState === 'READ' ? '' : 'Save'}
       </Button>
-      : <Button uppercase onClick={() => dispatch(toggleEdit())}>
+    ) : (
+      <Button uppercase onClick={() => toggleEdit()}>
         {editState === 'READ' ? 'Edit' : 'Cancel'}
-      </Button>}
-  </div>;
+      </Button>
+    )}
+  </div>
+);
 
 UpdateStateButton.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   editState: PropTypes.string.isRequired,
   buttonType: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-  editState: state.states,
+  editState: state.toggleEdit,
 });
 
-export default connect(mapStateToProps, null)(UpdateStateButton);
+export default connect(mapStateToProps, { save, toggleEdit })(UpdateStateButton);

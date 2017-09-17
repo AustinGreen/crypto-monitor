@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
 import throttle from 'lodash/throttle';
-import portfolioApp from './reducers';
+import rootReducer from './reducers';
 import { loadState, saveState } from './localStorage';
 
 const addLoggingToDispatch = (store) => {
@@ -22,7 +22,7 @@ const addLoggingToDispatch = (store) => {
 
 const configureStore = () => {
   const persistedState = loadState();
-  const store = createStore(portfolioApp, persistedState);
+  const store = createStore(rootReducer, persistedState);
 
   if (process.env.NODE_ENV !== 'production') {
     store.dispatch = addLoggingToDispatch(store);

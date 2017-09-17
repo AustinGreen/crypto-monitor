@@ -1,6 +1,8 @@
+import { EDIT_AMOUNT, SAVE_AMOUNTS } from '../actions/types';
+
 const amount = (state, action, i) => {
   switch (action.type) {
-    case 'EDIT_AMOUNT':
+    case EDIT_AMOUNT:
       if (state.name !== action.name) {
         return state;
       }
@@ -8,7 +10,7 @@ const amount = (state, action, i) => {
         ...state,
         amount: action.amount,
       };
-    case 'SAVE_AMOUNTS':
+    case SAVE_AMOUNTS:
       return {
         ...state,
         amount: action.amounts[i],
@@ -31,9 +33,9 @@ const amounts = (
   action,
 ) => {
   switch (action.type) {
-    case 'EDIT_AMOUNT':
+    case EDIT_AMOUNT:
       return state.map(a => amount(a, action));
-    case 'SAVE_AMOUNTS':
+    case SAVE_AMOUNTS:
       return state.map((a, i) => amount(a, action, i));
     default:
       return state;

@@ -1,21 +1,21 @@
-// import { v4 } from 'node-uuid';
+import { UPDATE_PRICES, EDIT_AMOUNT, TOGGLE_EDIT, SAVE_AMOUNTS } from './types';
 
-export const receivePrices = response => ({
-  type: 'RECEIVE_PRICES',
+export const updatePrices = response => ({
+  type: UPDATE_PRICES,
   response,
 });
 
 export const editAmount = (amount, name) => ({
-  type: 'EDIT_AMOUNT',
+  type: EDIT_AMOUNT,
   name,
   amount,
 });
 
 export const toggleEdit = () => ({
-  type: 'TOGGLE_EDIT',
+  type: TOGGLE_EDIT,
 });
 
 export const save = amounts => ({
-  type: 'SAVE_AMOUNTS',
+  type: SAVE_AMOUNTS,
   amounts,
 });

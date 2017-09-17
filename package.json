@@ -5,6 +5,7 @@
   "dependencies": {
     "bulma": "^0.4.2",
     "currency-formatter": "^1.2.1",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "node-uuid": "^1.4.8",

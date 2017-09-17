@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import amounts from './amounts';
-import states from './states';
+import toggleEdit from './toggleEdit';
 import prices from './prices';
 
-const portfolioApp = combineReducers({
+const rootReducer = combineReducers({
   amounts,
-  states,
+  toggleEdit,
   prices,
 });
 
-export default portfolioApp;
+export default rootReducer;

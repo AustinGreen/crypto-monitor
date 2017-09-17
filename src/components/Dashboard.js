@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { receivePrices } from '../actions';
+import { updatePrices } from '../actions';
 import Switch from './shared/Switch';
 import Prices from './Prices';
 import Portfolio from './Portfolio';
@@ -13,10 +13,13 @@ class Dashboard extends Component {
   }
 
   fetchPrices(currencyAmounts) {
-    const currencyString = currencyAmounts.map(a => a.name).toString();
+    const currencyString = currencyAmounts.map(a => a.name).join();
     fetch(`https://min-api.cryptocompare.com/data/price?fsym=USD&tsyms=${currencyString}`)
       .then(response => response.json())
-      .then(result => this.props.receivePrices(currencyAmounts.map(a => 1 / result[a.name])));
+      .then((result) => {
+        const pricesUSD = currencyAmounts.map(a => 1 / result[a.name]);
+        this.props.updatePrices(pricesUSD);
+      });
   }
 
   render() {
@@ -48,9 +51,7 @@ class Dashboard extends Component {
             </NavLink>
           </p>
         </Switch>
-        <div className="column is-half is-offset-one-quarter">
-          {children}
-        </div>
+        <div className="column is-half is-offset-one-quarter">{children}</div>
       </div>
     );
   }
@@ -66,7 +67,7 @@ Dashboard.propTypes = {
   ).isRequired,
   children: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   prices: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  receivePrices: PropTypes.func.isRequired,
+  updatePrices: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -74,4 +75,4 @@ const mapStateToProps = state => ({
   prices: state.prices,
 });
 
-export default connect(mapStateToProps, { receivePrices })(Dashboard);
+export default connect(mapStateToProps, { updatePrices })(Dashboard);

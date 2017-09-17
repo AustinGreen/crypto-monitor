@@ -1,6 +1,8 @@
+import { UPDATE_PRICES } from '../actions/types';
+
 const prices = (state = [], action) => {
   switch (action.type) {
-    case 'RECEIVE_PRICES':
+    case UPDATE_PRICES:
       return action.response;
     default:
       return state;

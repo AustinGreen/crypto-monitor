@@ -5,8 +5,6 @@ import currencyFormatter from 'currency-formatter';
 import CurrencyListItem from './shared/CurrencyListItem';
 import FlexContainer from './shared/FlexContainer';
 
-let myData = [{ angle: 0 }];
-
 class Portfolio extends Component {
   constructor() {
     super();
@@ -19,12 +17,15 @@ class Portfolio extends Component {
 
   updateChart() {
     const { currencyAmounts, prices } = this.props;
-    myData = currencyAmounts.map((amount, i) => ({
-      angle: Math.round(amount.amount * prices[i]),
-      label: amount.name,
-      color: amount.color,
-    }));
-    return (
+    const defaultChartData = [{ angle: 100, label: 'No data', color: '#f5f5f5' }];
+    const chartData = currencyAmounts
+      .map((amount, i) => ({
+        angle: Math.round(amount.amount * prices[i]),
+        label: amount.name,
+        color: amount.color,
+      }))
+      .filter(amount => amount.angle !== 0);
+    return chartData.length ? (
       <RadialChart
         colorDomain={[0, 100]}
         colorRange={[0, 10]}
@@ -33,7 +34,21 @@ class Portfolio extends Component {
         radius={120}
         showLabels
         labelsAboveChildren
-        data={myData}
+        data={chartData}
+        width={600}
+        height={300}
+        animation
+      />
+    ) : (
+      <RadialChart
+        colorDomain={[0, 100]}
+        colorRange={[0, 10]}
+        colorType="literal"
+        innerRadius={80}
+        radius={120}
+        showLabels
+        labelsAboveChildren
+        data={defaultChartData}
         width={600}
         height={300}
         animation
@@ -41,28 +56,28 @@ class Portfolio extends Component {
     );
   }
 
+  displayTotalPortfolio() {
+    const { currencyAmounts, prices } = this.props;
+    return currencyFormatter.format(currencyAmounts.map((a, i) => a.amount * prices[i]).reduce((a, b) => a + b), {
+      code: 'USD',
+    });
+  }
+
   render() {
     const { currencyAmounts, prices } = this.props;
     return (
       <section className="section">
-        <h1 className="title has-text-centered">
-          Total Portfolio:{' '}
-          {currencyFormatter.format(currencyAmounts.map((a, i) => a.amount * prices[i]).reduce((a, b) => a + b), {
-            code: 'USD',
-          })}
-        </h1>
-        {this.updateChart()}
+        <h1 className="title has-text-centered">Total Portfolio: {this.displayTotalPortfolio()}</h1>
+        <div>{this.updateChart()}</div>
         <div>
-          {currencyAmounts.map((amount, i) =>
+          {currencyAmounts.map((amount, i) => (
             <FlexContainer key={amount.name}>
               <CurrencyListItem {...amount} key={amount.name}>
                 {amount.fullName}
               </CurrencyListItem>
-              <span>
-                {currencyFormatter.format(amount.amount * prices[i], { code: 'USD' })}
-              </span>
-            </FlexContainer>,
-          )}
+              <span>{currencyFormatter.format(amount.amount * prices[i], { code: 'USD' })}</span>
+            </FlexContainer>
+          ))}
         </div>
       </section>
     );

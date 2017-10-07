@@ -1,32 +1,14 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { createLogger } from 'redux-logger';
 import throttle from 'lodash/throttle';
 import rootReducer from './reducers';
 import { loadState, saveState } from './localStorage';
 
-const addLoggingToDispatch = (store) => {
-  const rawDispatch = store.dispatch;
-  if (!console.group) {
-    return rawDispatch;
-  }
-
-  return (action) => {
-    console.group(action.type);
-    console.log('%c prev state', 'color: gray', store.getState());
-    console.log('%c action', 'color: orange', action);
-    const returnValue = rawDispatch(action);
-    console.log('%c next state', 'color: white', store.getState());
-    console.groupEnd(action.type);
-    return returnValue;
-  };
-};
+const logger = createLogger();
 
 const configureStore = () => {
   const persistedState = loadState();
-  const store = createStore(rootReducer, persistedState);
-
-  if (process.env.NODE_ENV !== 'production') {
-    store.dispatch = addLoggingToDispatch(store);
-  }
+  const store = createStore(rootReducer, persistedState, applyMiddleware(logger));
 
   store.subscribe(
     throttle(() => {

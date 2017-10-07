@@ -23,7 +23,7 @@ const addLoggingToDispatch = (store) => {
 const configureStore = () => {
   const persistedState = loadState();
   const store = createStore(rootReducer, persistedState);
-
+  console.log(store.getState());
   if (process.env.NODE_ENV !== 'production') {
     store.dispatch = addLoggingToDispatch(store);
   }

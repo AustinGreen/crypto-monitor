@@ -1,21 +1,19 @@
-import { UPDATE_PRICES, EDIT_AMOUNT, TOGGLE_EDIT, SAVE_AMOUNTS } from './types';
+import { UPDATE_PRICES, TOGGLE_EDIT_MODE, SAVE_AMOUNTS } from './types';
 
 export const updatePrices = response => ({
   type: UPDATE_PRICES,
-  response,
-});
-
-export const editAmount = (amount, name) => ({
-  type: EDIT_AMOUNT,
-  name,
-  amount,
+  payload: {
+    response,
+  },
 });
 
 export const toggleEdit = () => ({
-  type: TOGGLE_EDIT,
+  type: TOGGLE_EDIT_MODE,
 });
 
 export const save = amounts => ({
   type: SAVE_AMOUNTS,
-  amounts,
+  payload: {
+    amounts,
+  },
 });

@@ -2,16 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import InputField from './shared/InputField';
+import { save, toggleEdit } from '../actions';
 
-const Amount = ({ currencyAmounts, fullName, name, editState }) => (
+const Amount = props => (
   <div className="column is-half-mobile">
+    {console.log('props', props)}
     {editState === 'READ' ? (
-      <div>
+      <div onClick={() => toggleEdit()}>
         <p className="title is-5">{fullName}</p>
         <p className="subtitle is-6">{`${currencyAmounts.find(a => a.name === name).amount} ${name}`}</p>
       </div>
     ) : (
-      <div className="field has-addons" style={{ justifyContent: 'center' }}>
+      <div
+        className="field has-addons"
+        style={{ justifyContent: 'center' }}
+        onClick={() => {
+          const amounts = [...document.querySelectorAll('input')].map(a => parseFloat(a.value));
+          save(amounts);
+          toggleEdit();
+        }}
+      >
         <p className="control has-icons-right">
           <InputField white defaultValue={currencyAmounts.find(a => a.name === name).amount} placeholder="0" />
           <span className="icon is-right">{name}</span>
@@ -39,4 +49,4 @@ const mapStateToProps = state => ({
   editState: state.toggleEdit,
 });
 
-export default connect(mapStateToProps, null)(Amount);
+export default connect(mapStateToProps, { toggleEdit, save })(Amount);

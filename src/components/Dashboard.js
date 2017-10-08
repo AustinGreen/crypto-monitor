@@ -76,7 +76,7 @@ Dashboard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  currencyAmounts: state.amounts,
+  currencyAmounts: state.currencyData,
   prices: state.prices,
 });
 

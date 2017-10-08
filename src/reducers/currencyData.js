@@ -13,14 +13,14 @@ const amount = (state, action, i) => {
     case SAVE_AMOUNTS:
       return {
         ...state,
-        amount: action.amounts[i],
+        amount: action.currencyData[i],
       };
     default:
       return state;
   }
 };
 
-const amounts = (
+const currencyData = (
   state = [
     { name: 'BTC', amount: 0, fullName: 'Bitcoin', color: '#FF9900' },
     { name: 'ETH', amount: 0, fullName: 'Ethereum', color: '#3C3C3D' },
@@ -42,4 +42,4 @@ const amounts = (
   }
 };
 
-export default amounts;
+export default currencyData;

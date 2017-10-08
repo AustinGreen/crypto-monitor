@@ -15,7 +15,7 @@ export const toggleEdit = () => ({
   type: TOGGLE_EDIT,
 });
 
-export const save = amounts => ({
+export const save = currencyData => ({
   type: SAVE_AMOUNTS,
-  amounts,
+  currencyData,
 });

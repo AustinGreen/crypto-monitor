@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import amounts from './amounts';
+import currencyData from './currencyData';
 import toggleEdit from './toggleEdit';
 import prices from './prices';
 
 const rootReducer = combineReducers({
-  amounts,
+  currencyData,
   toggleEdit,
   prices,
 });

@@ -13,7 +13,7 @@ const configureStore = () => {
   store.subscribe(
     throttle(() => {
       saveState({
-        amounts: store.getState().amounts,
+        currencyData: store.getState().currencyData,
       });
     }, 1000),
   );

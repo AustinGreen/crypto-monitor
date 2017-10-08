@@ -8,7 +8,7 @@ class Hero extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      updatedCurrencyData: this.props.amounts,
+      updatedCurrencyData: this.props.currencyData,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -22,7 +22,7 @@ class Hero extends Component {
   }
 
   render() {
-    const { amounts } = this.props;
+    const { currencyData } = this.props;
     const { updatedCurrencyData } = this.state;
     return (
       <section className="hero is-dark">
@@ -39,7 +39,7 @@ class Hero extends Component {
               </div>
             </nav>
             <form className="columns is-multiline is-mobile">
-              {amounts.map(amount => (
+              {currencyData.map(amount => (
                 <Amount
                   fullName={amount.fullName}
                   name={amount.name}
@@ -56,7 +56,7 @@ class Hero extends Component {
 }
 
 Hero.propTypes = {
-  amounts: PropTypes.arrayOf(
+  currencyData: PropTypes.arrayOf(
     PropTypes.shape({
       amount: PropTypes.number.isRequired,
       fullName: PropTypes.string.isRequired,

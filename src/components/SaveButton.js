@@ -20,6 +20,13 @@ SaveButton.propTypes = {
   editState: PropTypes.string.isRequired,
   onSave: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
+  updatedCurrencyData: PropTypes.arrayOf(
+    PropTypes.shape({
+      amount: PropTypes.number.isRequired,
+      fullName: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 const mapStateToProps = state => ({

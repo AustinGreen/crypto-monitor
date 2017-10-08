@@ -37,10 +37,11 @@ Amount.propTypes = {
   fullName: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   editState: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  currencyAmounts: state.amounts,
+  currencyAmounts: state.currencyData,
   editState: state.toggleEdit,
 });
 

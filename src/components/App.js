@@ -5,18 +5,19 @@ import PropTypes from 'prop-types';
 import Hero from './Hero';
 import Dashboard from './Dashboard';
 
-const App = ({ amounts }) =>
+const App = ({ currencyData }) => (
   <div>
-    <Hero amounts={amounts} />
+    <Hero currencyData={currencyData} />
     <Dashboard>
       <Route exact path="/" render={() => <Redirect to="/prices" />} />
       <Route path="/prices" />
       <Route path="/portfolio" />
     </Dashboard>
-  </div>;
+  </div>
+);
 
 App.propTypes = {
-  amounts: PropTypes.arrayOf(
+  currencyData: PropTypes.arrayOf(
     PropTypes.shape({
       amount: PropTypes.number.isRequired,
       fullName: PropTypes.string.isRequired,
@@ -26,5 +27,5 @@ App.propTypes = {
 };
 
 export default connect(state => ({
-  amounts: state.amounts,
+  currencyData: state.currencyData,
 }))(App);

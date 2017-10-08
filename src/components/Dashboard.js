@@ -8,6 +8,11 @@ import Prices from './Prices';
 import Portfolio from './Portfolio';
 
 class Dashboard extends Component {
+  constructor() {
+    super();
+    this.fetchPrices = this.fetchPrices.bind(this);
+  }
+
   componentDidMount() {
     this.fetchPrices(this.props.currencyAmounts);
   }
@@ -33,7 +38,7 @@ class Dashboard extends Component {
           if (child.props.path.includes('portfolio')) {
             return <Portfolio fetchPrices={this.fetchPrices} currencyAmounts={currencyAmounts} prices={prices} />;
           }
-          return <Prices currencyAmounts={currencyAmounts} prices={prices} fetchPrices={this.fetchPrices.bind(this)} />;
+          return <Prices currencyAmounts={currencyAmounts} prices={prices} fetchPrices={this.fetchPrices} />;
         },
       }),
     );

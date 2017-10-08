@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { save, toggleEdit } from '../actions';
 
-const SaveButton = ({ editState, onSave, onToggle }) =>
+const SaveButton = ({ updatedCurrencyData, editState, onSave, onToggle }) =>
   editState === 'READ' ? null : (
     <button
       onClick={() => {
-        const amounts = [...document.querySelectorAll('input')].map(a => parseFloat(a.value));
-        onSave(amounts);
+        onSave(updatedCurrencyData.map(currency => parseFloat(currency.amount)));
         onToggle();
       }}
       className="button is-inverted is-outlined is-success is-small"

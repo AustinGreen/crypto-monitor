@@ -1,30 +1,59 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Amount from './Amount';
 import EditButton from './EditButton';
 import SaveButton from './SaveButton';
 
-const Hero = ({ amounts }) => (
-  <section className="hero is-dark">
-    <div className="hero-body" style={{ paddingTop: '1em' }}>
-      <div className="container">
-        <nav className="level">
-          <div className="level-left">
-            <div className="level-item">
-              <EditButton />
-            </div>
-            <div className="level-item">
-              <SaveButton />
-            </div>
+class Hero extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      updatedCurrencyData: this.props.amounts,
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(value = 0, changedCurrencyName) {
+    const { updatedCurrencyData } = this.state;
+    const changedIndex = updatedCurrencyData.findIndex(currency => changedCurrencyName === currency.name);
+    const changedData = [...updatedCurrencyData];
+    changedData[changedIndex].amount = parseFloat(value);
+    this.setState({ updatedCurrencyData: changedData });
+  }
+
+  render() {
+    const { amounts } = this.props;
+    const { updatedCurrencyData } = this.state;
+    return (
+      <section className="hero is-dark">
+        <div className="hero-body" style={{ paddingTop: '1em' }}>
+          <div className="container">
+            <nav className="level">
+              <div className="level-left">
+                <div className="level-item">
+                  <EditButton />
+                </div>
+                <div className="level-item">
+                  <SaveButton updatedCurrencyData={updatedCurrencyData} />
+                </div>
+              </div>
+            </nav>
+            <form className="columns is-multiline is-mobile">
+              {amounts.map(amount => (
+                <Amount
+                  fullName={amount.fullName}
+                  name={amount.name}
+                  key={amount.name}
+                  handleChange={this.handleChange}
+                />
+              ))}
+            </form>
           </div>
-        </nav>
-        <div className="columns is-multiline is-mobile">
-          {amounts.map(amount => <Amount fullName={amount.fullName} name={amount.name} key={amount.name} />)}
         </div>
-      </div>
-    </div>
-  </section>
-);
+      </section>
+    );
+  }
+}
 
 Hero.propTypes = {
   amounts: PropTypes.arrayOf(

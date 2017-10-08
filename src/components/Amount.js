@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import InputField from './shared/InputField';
 
-const Amount = ({ currencyAmounts, fullName, name, editState }) => (
+const Amount = ({ currencyAmounts, handleChange, fullName, name, editState }) => (
   <div className="column is-half-mobile">
     {editState === 'READ' ? (
       <div>
@@ -11,9 +11,14 @@ const Amount = ({ currencyAmounts, fullName, name, editState }) => (
         <p className="subtitle is-6">{`${currencyAmounts.find(a => a.name === name).amount} ${name}`}</p>
       </div>
     ) : (
-      <div className="field has-addons" style={{ justifyContent: 'center' }}>
+      <div className="field has-addons is-horizontal" style={{ justifyContent: 'center' }}>
         <p className="control has-icons-right">
-          <InputField white defaultValue={currencyAmounts.find(a => a.name === name).amount} placeholder="0" />
+          <InputField
+            onChange={e => handleChange(e.target.value, name)}
+            white
+            defaultValue={currencyAmounts.find(a => a.name === name).amount}
+            placeholder="0"
+          />
           <span className="icon is-right">{name}</span>
         </p>
       </div>

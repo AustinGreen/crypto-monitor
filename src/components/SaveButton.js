@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { save, toggleEdit } from '../actions';
+import { save } from '../actions';
 
-const SaveButton = ({ updatedCurrencyData, editState, onSave, onToggle }) =>
+const SaveButton = ({ updatedCurrencyData, editState, onSave }) =>
   editState === 'READ' ? null : (
     <button
-      onClick={() => {
-        onSave(updatedCurrencyData.map(currency => parseFloat(currency.amount)));
-        onToggle();
-      }}
+      onClick={() => onSave(updatedCurrencyData.map(currency => parseFloat(currency.amount)))}
       className="button is-inverted is-outlined is-success is-small"
     >
       Save
@@ -19,7 +16,6 @@ const SaveButton = ({ updatedCurrencyData, editState, onSave, onToggle }) =>
 SaveButton.propTypes = {
   editState: PropTypes.string.isRequired,
   onSave: PropTypes.func.isRequired,
-  onToggle: PropTypes.func.isRequired,
   updatedCurrencyData: PropTypes.arrayOf(
     PropTypes.shape({
       amount: PropTypes.number.isRequired,
@@ -33,4 +29,4 @@ const mapStateToProps = state => ({
   editState: state.toggleEdit,
 });
 
-export default connect(mapStateToProps, { onSave: save, onToggle: toggleEdit })(SaveButton);
+export default connect(mapStateToProps, { onSave: save })(SaveButton);

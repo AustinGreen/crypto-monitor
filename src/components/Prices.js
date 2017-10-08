@@ -5,31 +5,30 @@ import FontAwesome from 'react-fontawesome';
 import CurrencyListItem from './shared/CurrencyListItem';
 import FlexContainer from './shared/FlexContainer';
 
-const Prices = ({ currencyAmounts, prices, fetchPrices }) =>
+const Prices = ({ currencyData, prices, fetchPrices }) => (
   <section className="section">
     <h1 className="title has-text-centered">Prices</h1>
     <div>
-      {currencyAmounts.map((amount, i) =>
+      {currencyData.map((amount, i) => (
         <FlexContainer key={amount.name}>
           <CurrencyListItem {...amount} key={amount.name}>
             {amount.name}
           </CurrencyListItem>
-          <span>
-            {currencyFormatter.format(prices[i], { code: 'USD' })}
-          </span>
-        </FlexContainer>,
-      )}
+          <span>{currencyFormatter.format(prices[i], { code: 'USD' })}</span>
+        </FlexContainer>
+      ))}
     </div>
-    <button className="button is-dark" onClick={() => fetchPrices(currencyAmounts)} style={{ float: 'right' }}>
+    <button className="button is-dark" onClick={() => fetchPrices(currencyData)} style={{ float: 'right' }}>
       <span className="icon">
         <FontAwesome name="refresh" />
       </span>
       <span>Update Prices</span>
     </button>
-  </section>;
+  </section>
+);
 
 Prices.propTypes = {
-  currencyAmounts: PropTypes.arrayOf(
+  currencyData: PropTypes.arrayOf(
     PropTypes.shape({
       amount: PropTypes.number.isRequired,
       fullName: PropTypes.string.isRequired,

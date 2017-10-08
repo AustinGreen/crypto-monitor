@@ -14,21 +14,21 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.fetchPrices(this.props.currencyAmounts);
+    this.fetchPrices(this.props.currencyData);
   }
 
-  fetchPrices(currencyAmounts) {
-    const currencyString = currencyAmounts.map(a => a.name).join();
+  fetchPrices(currencyData) {
+    const currencyString = currencyData.map(currency => currency.name).join();
     fetch(`https://min-api.cryptocompare.com/data/price?fsym=USD&tsyms=${currencyString}`)
       .then(response => response.json())
       .then((result) => {
-        const pricesUSD = currencyAmounts.map(a => 1 / result[a.name]);
+        const pricesUSD = currencyData.map(a => 1 / result[a.name]);
         this.props.updatePrices(pricesUSD);
       });
   }
 
   render() {
-    const { currencyAmounts, prices } = this.props;
+    const { currencyData, prices } = this.props;
     const children = React.Children.map(this.props.children, child =>
       React.cloneElement(child, {
         render: () => {
@@ -36,9 +36,9 @@ class Dashboard extends Component {
             return child;
           }
           if (child.props.path.includes('portfolio')) {
-            return <Portfolio fetchPrices={this.fetchPrices} currencyAmounts={currencyAmounts} prices={prices} />;
+            return <Portfolio fetchPrices={this.fetchPrices} currencyData={currencyData} prices={prices} />;
           }
-          return <Prices currencyAmounts={currencyAmounts} prices={prices} fetchPrices={this.fetchPrices} />;
+          return <Prices currencyData={currencyData} prices={prices} fetchPrices={this.fetchPrices} />;
         },
       }),
     );
@@ -63,7 +63,7 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  currencyAmounts: PropTypes.arrayOf(
+  currencyData: PropTypes.arrayOf(
     PropTypes.shape({
       amount: PropTypes.number.isRequired,
       fullName: PropTypes.string.isRequired,
@@ -76,7 +76,7 @@ Dashboard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  currencyAmounts: state.currencyData,
+  currencyData: state.currencyData,
   prices: state.prices,
 });
 

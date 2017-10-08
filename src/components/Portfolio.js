@@ -16,9 +16,9 @@ class Portfolio extends Component {
   }
 
   updateChart() {
-    const { currencyAmounts, prices } = this.props;
+    const { currencyData, prices } = this.props;
     const defaultChartData = [{ angle: 100, label: 'No data', color: '#f5f5f5' }];
-    const chartData = currencyAmounts
+    const chartData = currencyData
       .map((amount, i) => ({
         angle: Math.round(amount.amount * prices[i]),
         label: amount.name,
@@ -57,20 +57,20 @@ class Portfolio extends Component {
   }
 
   displayTotalPortfolio() {
-    const { currencyAmounts, prices } = this.props;
-    return currencyFormatter.format(currencyAmounts.map((a, i) => a.amount * prices[i]).reduce((a, b) => a + b), {
+    const { currencyData, prices } = this.props;
+    return currencyFormatter.format(currencyData.map((a, i) => a.amount * prices[i]).reduce((a, b) => a + b), {
       code: 'USD',
     });
   }
 
   render() {
-    const { currencyAmounts, prices } = this.props;
+    const { currencyData, prices } = this.props;
     return (
       <section className="section">
         <h1 className="title has-text-centered">Total Portfolio: {this.displayTotalPortfolio()}</h1>
         <div>{this.updateChart()}</div>
         <div>
-          {currencyAmounts.map((amount, i) => (
+          {currencyData.map((amount, i) => (
             <FlexContainer key={amount.name}>
               <CurrencyListItem {...amount} key={amount.name}>
                 {amount.fullName}
@@ -85,7 +85,7 @@ class Portfolio extends Component {
 }
 
 Portfolio.propTypes = {
-  currencyAmounts: PropTypes.arrayOf(
+  currencyData: PropTypes.arrayOf(
     PropTypes.shape({
       amount: PropTypes.number.isRequired,
       fullName: PropTypes.string.isRequired,

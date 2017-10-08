@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Amount from './Amount';
-import UpdateStateButton from './UpdateStateButton';
+import EditButton from './EditButton';
+import SaveButton from './SaveButton';
 
 const Hero = ({ amounts }) => (
   <section className="hero is-dark">
@@ -10,10 +11,10 @@ const Hero = ({ amounts }) => (
         <nav className="level">
           <div className="level-left">
             <div className="level-item">
-              <UpdateStateButton buttonType="Edit" />
+              <EditButton />
             </div>
             <div className="level-item">
-              <UpdateStateButton buttonType="Save" />
+              <SaveButton />
             </div>
           </div>
         </nav>

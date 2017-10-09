@@ -55,7 +55,7 @@ class Hero extends Component {
                   handleChange={this.handleChange}
                 />
               ))}
-              <input type="submit" tabIndex="-1" />
+              <input type="submit" style={{ display: 'none' }} tabIndex="-1" />
             </form>
           </div>
         </div>

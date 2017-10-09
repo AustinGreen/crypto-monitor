@@ -1,4 +1,6 @@
-export const previousState = {
+import deepFreeze from 'deep-freeze';
+
+const intitialState = {
   currencyData: [
     {
       name: 'BTC',
@@ -46,6 +48,8 @@ export const previousState = {
   toggleEdit: 'READ',
   prices: [],
 };
+
+export const previousState = deepFreeze(intitialState);
 
 export const newCurrencyDataState = [
   {

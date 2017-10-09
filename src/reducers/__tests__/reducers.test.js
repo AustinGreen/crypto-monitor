@@ -1,13 +1,13 @@
 import currencyData from '../currencyData';
 import toggleEdit from '../toggleEdit';
 import prices from '../prices';
-import { UPDATE_PRICES, TOGGLE_EDIT, SAVE_AMOUNTS } from '../../actions/types';
+import { PRICES_UPDATE, EDIT_MODE_TOGGLE, AMOUNTS_SAVE } from '../../actions/types';
 import { previousState, newCurrencyDataState, newPriceState } from '../utils/fixtures';
 
 describe('Reducers', () => {
   it('Reducer: currencyData', () => {
     const action = {
-      type: SAVE_AMOUNTS,
+      type: AMOUNTS_SAVE,
       currencyData: [1.3, 6.67, 4, 1.75, 50, 5, 1.3],
     };
     const newState = currencyData(previousState.currencyData, action);
@@ -16,7 +16,7 @@ describe('Reducers', () => {
 
   it('Reducer: toggleEdit', () => {
     const action = {
-      type: TOGGLE_EDIT,
+      type: EDIT_MODE_TOGGLE,
     };
     const newState = toggleEdit(previousState.toggleEdit, action);
     const expectedNewState = 'EDIT';
@@ -25,7 +25,7 @@ describe('Reducers', () => {
 
   it('Reducer: prices', () => {
     const action = {
-      type: UPDATE_PRICES,
+      type: PRICES_UPDATE,
       response: newPriceState,
     };
     const newState = prices(previousState.prices, action);

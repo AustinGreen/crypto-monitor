@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import currencyData from './currencyData';
-import toggleEdit from './toggleEdit';
+import currencyData, * as fromCurrencyData from './currencyData';
+import toggleEdit, * as fromToggleEdit from './toggleEdit';
 import prices from './prices';
 
 const rootReducer = combineReducers({
@@ -10,3 +10,6 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
+
+export const getEditStateAsBool = state => fromToggleEdit.getEditStateAsBool(state.toggleEdit);
+export const getSimpleCurrencyData = state => fromCurrencyData.getSimpleCurrencyData(state.currencyData);

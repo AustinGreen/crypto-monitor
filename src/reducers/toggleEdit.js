@@ -1,10 +1,10 @@
-import { TOGGLE_EDIT, SAVE_AMOUNTS } from '../actions/types';
+import { EDIT_MODE_TOGGLE, AMOUNTS_SAVE } from '../actions/types';
 
 const toggleEdit = (state = 'READ', action) => {
   switch (action.type) {
-    case TOGGLE_EDIT:
+    case EDIT_MODE_TOGGLE:
       return state === 'READ' ? 'EDIT' : 'READ';
-    case SAVE_AMOUNTS:
+    case AMOUNTS_SAVE:
       return 'READ';
     default:
       return state;
@@ -12,3 +12,5 @@ const toggleEdit = (state = 'READ', action) => {
 };
 
 export default toggleEdit;
+
+export const getEditStateAsBool = state => state === 'EDIT';

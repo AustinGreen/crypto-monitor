@@ -2,20 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toggleEdit } from '../actions';
+import { getEditStateAsBool } from '../reducers';
 
-const EditButton = ({ editState, onToggle }) => (
+const EditButton = ({ isEditMode, onToggle }) => (
   <button onClick={onToggle} className="button is-inverted is-outlined is-dark is-small">
-    {editState === 'READ' ? 'Edit' : 'Cancel'}
+    {isEditMode ? 'Edit' : 'Cancel'}
   </button>
 );
 
 EditButton.propTypes = {
-  editState: PropTypes.string.isRequired,
+  isEditMode: PropTypes.bool.isRequired,
   onToggle: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  editState: state.toggleEdit,
+  isEditMode: getEditStateAsBool(state),
 });
 
 export default connect(mapStateToProps, { onToggle: toggleEdit })(EditButton);

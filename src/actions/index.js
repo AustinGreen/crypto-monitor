@@ -1,15 +1,15 @@
-import { UPDATE_PRICES, TOGGLE_EDIT, SAVE_AMOUNTS } from './types';
+import { PRICES_UPDATE, EDIT_MODE_TOGGLE, AMOUNTS_SAVE } from './types';
 
 export const updatePrices = response => ({
-  type: UPDATE_PRICES,
+  type: PRICES_UPDATE,
   response,
 });
 
 export const toggleEdit = () => ({
-  type: TOGGLE_EDIT,
+  type: EDIT_MODE_TOGGLE,
 });
 
 export const save = currencyData => ({
-  type: SAVE_AMOUNTS,
+  type: AMOUNTS_SAVE,
   currencyData,
 });

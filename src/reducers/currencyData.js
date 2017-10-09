@@ -1,8 +1,8 @@
-import { SAVE_AMOUNTS } from '../actions/types';
+import { AMOUNTS_SAVE } from '../actions/types';
 
 const amount = (state, action, i) => {
   switch (action.type) {
-    case SAVE_AMOUNTS:
+    case AMOUNTS_SAVE:
       return {
         ...state,
         amount: action.currencyData[i],
@@ -59,7 +59,7 @@ const defaultState = [
 
 const currencyData = (state = defaultState, action) => {
   switch (action.type) {
-    case SAVE_AMOUNTS:
+    case AMOUNTS_SAVE:
       return state.map((a, i) => amount(a, action, i));
     default:
       return state;
@@ -67,3 +67,12 @@ const currencyData = (state = defaultState, action) => {
 };
 
 export default currencyData;
+
+export const getSimpleCurrencyData = (state) => {
+  const simpleCurrencyData = Object.create(null);
+  state.map((currency) => {
+    simpleCurrencyData[currency.name] = currency.amount;
+    return currency;
+  });
+  return simpleCurrencyData;
+};

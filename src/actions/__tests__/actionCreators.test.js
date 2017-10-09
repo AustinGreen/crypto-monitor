@@ -1,5 +1,5 @@
 import { updatePrices, toggleEdit, save } from '../';
-import { UPDATE_PRICES, TOGGLE_EDIT, SAVE_AMOUNTS } from '../types';
+import { PRICES_UPDATE, EDIT_MODE_TOGGLE, AMOUNTS_SAVE } from '../types';
 
 describe('Action Creators', () => {
   it('Action Creator: updatePrices', () => {
@@ -12,11 +12,11 @@ describe('Action Creators', () => {
       88.41732979664013,
       324.99187520311995,
     ];
-    expect(updatePrices(response)).toEqual({ type: UPDATE_PRICES, response });
+    expect(updatePrices(response)).toEqual({ type: PRICES_UPDATE, response });
   });
 
   it('Action Creator: toggleEdit', () => {
-    expect(toggleEdit()).toEqual({ type: TOGGLE_EDIT });
+    expect(toggleEdit()).toEqual({ type: EDIT_MODE_TOGGLE });
   });
 
   it('Action Creator: save', () => {
@@ -64,6 +64,6 @@ describe('Action Creators', () => {
         color: '#1CAADE',
       },
     ];
-    expect(save(currencyData)).toEqual({ type: SAVE_AMOUNTS, currencyData });
+    expect(save(currencyData)).toEqual({ type: AMOUNTS_SAVE, currencyData });
   });
 });

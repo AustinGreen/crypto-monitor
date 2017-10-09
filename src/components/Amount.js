@@ -2,47 +2,46 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import InputField from './shared/InputField';
+import { getEditStateAsBool, getSimpleCurrencyData } from '../reducers';
 
-const Amount = ({ currencyAmounts, handleChange, fullName, name, editState }) => (
+const Amount = ({
+  currencyAmounts, handleChange, fullName, name, isEditMode,
+}) => (
   <div className="column is-half-mobile">
-    {editState === 'READ' ? (
-      <div>
-        <p className="title is-5">{fullName}</p>
-        <p className="subtitle is-6">{`${currencyAmounts.find(a => a.name === name).amount} ${name}`}</p>
-      </div>
-    ) : (
+    {isEditMode ? (
       <div className="field has-addons is-horizontal" style={{ justifyContent: 'center' }}>
         <p className="control has-icons-right">
           <InputField
             onChange={e => handleChange(e.target.value, name)}
             white
-            defaultValue={currencyAmounts.find(a => a.name === name).amount}
+            defaultValue={currencyAmounts[name]}
             placeholder="0"
           />
           <span className="icon is-right">{name}</span>
         </p>
+      </div>
+    ) : (
+      <div>
+        <p className="title is-5">{fullName}</p>
+        <p className="subtitle is-6">{`${currencyAmounts[name]} ${name}`}</p>
       </div>
     )}
   </div>
 );
 
 Amount.propTypes = {
-  currencyAmounts: PropTypes.arrayOf(
-    PropTypes.shape({
-      amount: PropTypes.number.isRequired,
-      fullName: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  currencyAmounts: PropTypes.shape({
+    name: PropTypes.number.isRequired,
+  }).isRequired,
   fullName: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  editState: PropTypes.string.isRequired,
+  isEditMode: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  currencyAmounts: state.currencyData,
-  editState: state.toggleEdit,
+  currencyAmounts: getSimpleCurrencyData(state),
+  isEditMode: getEditStateAsBool(state),
 });
 
 export default connect(mapStateToProps, null)(Amount);

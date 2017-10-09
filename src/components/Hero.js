@@ -73,4 +73,8 @@ Hero.propTypes = {
   onSave: PropTypes.func.isRequired,
 };
 
-export default connect(null, { onSave: save })(Hero);
+const mapStateToProps = state => ({
+  currencyData: state.currencyData,
+});
+
+export default connect(mapStateToProps, { onSave: save })(Hero);

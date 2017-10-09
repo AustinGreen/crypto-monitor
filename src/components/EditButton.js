@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { toggleEdit } from '../actions';
 
 const EditButton = ({ editState, onToggle }) => (
-  <button onClick={onToggle} className="button is-inverted is-outlined is-success is-small">
+  <button onClick={onToggle} className="button is-inverted is-outlined is-dark is-small">
     {editState === 'READ' ? 'Edit' : 'Cancel'}
   </button>
 );

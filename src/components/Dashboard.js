@@ -10,11 +10,26 @@ import Portfolio from './Portfolio';
 class Dashboard extends Component {
   constructor() {
     super();
+    this.state = {
+      intervalId: null,
+    };
+
     this.fetchPrices = this.fetchPrices.bind(this);
+    this.setInterval = this.setInterval.bind(this);
   }
 
   componentDidMount() {
     this.fetchPrices(this.props.currencyData);
+    const intervalId = setInterval(() => this.fetchPrices(this.props.currencyData), 15000);
+    this.setInterval(intervalId);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId);
+  }
+
+  setInterval(intervalId) {
+    this.setState({ intervalId });
   }
 
   fetchPrices(currencyData) {

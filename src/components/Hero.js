@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Amount from './Amount';
 import EditButton from './EditButton';
 import SaveButton from './SaveButton';
+import { save } from '../actions';
 
 class Hero extends Component {
   constructor(props) {
@@ -11,6 +13,12 @@ class Hero extends Component {
       updatedCurrencyData: this.props.currencyData,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.onSave(this.state.updatedCurrencyData.map(currency => parseFloat(currency.amount)));
   }
 
   handleChange(value = 0, changedCurrencyName) {
@@ -38,7 +46,7 @@ class Hero extends Component {
                 </div>
               </div>
             </nav>
-            <form className="columns is-multiline is-mobile">
+            <form onSubmit={this.handleSubmit} className="columns is-multiline is-mobile">
               {currencyData.map(amount => (
                 <Amount
                   fullName={amount.fullName}
@@ -47,6 +55,7 @@ class Hero extends Component {
                   handleChange={this.handleChange}
                 />
               ))}
+              <input type="submit" tabIndex="-1" />
             </form>
           </div>
         </div>
@@ -56,13 +65,12 @@ class Hero extends Component {
 }
 
 Hero.propTypes = {
-  currencyData: PropTypes.arrayOf(
-    PropTypes.shape({
-      amount: PropTypes.number.isRequired,
-      fullName: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  currencyData: PropTypes.arrayOf(PropTypes.shape({
+    amount: PropTypes.number.isRequired,
+    fullName: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
+  onSave: PropTypes.func.isRequired,
 };
 
-export default Hero;
+export default connect(null, { onSave: save })(Hero);

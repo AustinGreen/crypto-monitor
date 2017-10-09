@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import currencyFormatter from 'currency-formatter';
-import FontAwesome from 'react-fontawesome';
+// import FontAwesome from 'react-fontawesome';
 import CurrencyListItem from './shared/CurrencyListItem';
 import FlexContainer from './shared/FlexContainer';
 
@@ -18,12 +18,12 @@ const Prices = ({ currencyData, prices, fetchPrices }) => (
         </FlexContainer>
       ))}
     </div>
-    <button className="button is-dark" onClick={() => fetchPrices(currencyData)} style={{ float: 'right' }}>
+    {/* <button className="button is-dark" onClick={() => fetchPrices(currencyData)} style={{ float: 'right' }}>
       <span className="icon">
         <FontAwesome name="refresh" />
       </span>
       <span>Update Prices</span>
-    </button>
+    </button> */}
   </section>
 );
 

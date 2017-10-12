@@ -55,8 +55,7 @@ class Dashboard extends Component {
           }
           return <Prices currencyData={currencyData} prices={prices} fetchPrices={this.fetchPrices} />;
         },
-      }),
-    );
+      }));
     return (
       <div className="container">
         <Switch className="field has-addons">
@@ -78,13 +77,11 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  currencyData: PropTypes.arrayOf(
-    PropTypes.shape({
-      amount: PropTypes.number.isRequired,
-      fullName: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  currencyData: PropTypes.arrayOf(PropTypes.shape({
+    amount: PropTypes.number.isRequired,
+    fullName: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
   children: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   prices: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   updatePrices: PropTypes.func.isRequired,

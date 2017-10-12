@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { RadialChart } from 'react-vis';
 import * as or from 'orama';
 import PropTypes from 'prop-types';
 import currencyFormatter from 'currency-formatter';

@@ -53,7 +53,7 @@ class Dashboard extends Component {
           if (child.props.path.includes('portfolio')) {
             return <Portfolio fetchPrices={this.fetchPrices} currencyData={currencyData} prices={prices} />;
           }
-          return <Prices currencyData={currencyData} prices={prices} fetchPrices={this.fetchPrices} />;
+          return <Prices currencyData={currencyData} prices={prices} />;
         },
       }));
     return (

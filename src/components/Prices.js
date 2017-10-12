@@ -4,7 +4,7 @@ import currencyFormatter from 'currency-formatter';
 import CurrencyListItem from './shared/CurrencyListItem';
 import FlexContainer from './shared/FlexContainer';
 
-const Prices = ({ currencyData, prices, fetchPrices }) => (
+const Prices = ({ currencyData, prices }) => (
   <section className="section">
     <h1 className="title has-text-centered">Prices</h1>
     <div>
@@ -27,7 +27,6 @@ Prices.propTypes = {
     name: PropTypes.string.isRequired,
   })).isRequired,
   prices: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  fetchPrices: PropTypes.func.isRequired,
 };
 
 export default Prices;

@@ -6,7 +6,7 @@ import { getEditStateAsBool } from '../reducers';
 
 const EditButton = ({ isEditMode, onToggle }) => (
   <button onClick={onToggle} className="button is-inverted is-outlined is-dark is-small">
-    {isEditMode ? 'Edit' : 'Cancel'}
+    {isEditMode ? 'Cancel' : 'Edit'}
   </button>
 );
 

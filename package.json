@@ -8,6 +8,7 @@
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "node-uuid": "^1.4.8",
+    "orama": "^1.4.1",
     "prop-types": "^15.5.10",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",

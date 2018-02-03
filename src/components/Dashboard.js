@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updatePrices } from '../actions';
 import Switch from './shared/Switch';
-import Prices from './Prices';
-import Portfolio from './Portfolio';
 
 class Dashboard extends Component {
   constructor() {
@@ -43,19 +41,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { currencyData, prices } = this.props;
-    const children = React.Children.map(this.props.children, child =>
-      React.cloneElement(child, {
-        render: () => {
-          if (child.props.render) {
-            return child;
-          }
-          if (child.props.path.includes('portfolio')) {
-            return <Portfolio fetchPrices={this.fetchPrices} currencyData={currencyData} prices={prices} />;
-          }
-          return <Prices currencyData={currencyData} prices={prices} fetchPrices={this.fetchPrices} />;
-        },
-      }));
+    const { currencyData, prices, children } = this.props;
     return (
       <div className="container">
         <Switch className="field has-addons">
@@ -70,7 +56,7 @@ class Dashboard extends Component {
             </NavLink>
           </p>
         </Switch>
-        <div className="column is-half is-offset-one-quarter">{children}</div>
+        <div className="column is-half is-offset-one-quarter">{children(this.fetchPrices, currencyData, prices)}</div>
       </div>
     );
   }
@@ -82,7 +68,7 @@ Dashboard.propTypes = {
     fullName: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   })).isRequired,
-  children: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  children: PropTypes.func.isRequired,
   prices: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   updatePrices: PropTypes.func.isRequired,
 };

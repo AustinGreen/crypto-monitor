@@ -10,14 +10,11 @@ const configureStore = () => {
   const persistedState = loadState();
   const store = createStore(rootReducer, persistedState, applyMiddleware(logger));
 
-  store.subscribe(
-    throttle(() => {
-      saveState({
-        currencyData: store.getState().currencyData,
-      });
-    }, 1000),
-  );
-
+  store.subscribe(throttle(() => {
+    saveState({
+      currencyData: store.getState().currencyData,
+    });
+  }, 1000));
   return store;
 };
 

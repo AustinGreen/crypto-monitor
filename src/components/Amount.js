@@ -31,12 +31,16 @@ const Amount = ({
 
 Amount.propTypes = {
   currencyAmounts: PropTypes.shape({
-    name: PropTypes.number.isRequired,
-  }).isRequired,
+    name: PropTypes.number,
+  }),
   fullName: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   isEditMode: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
+};
+
+Amount.defaultProps = {
+  currencyAmounts: [],
 };
 
 const mapStateToProps = state => ({

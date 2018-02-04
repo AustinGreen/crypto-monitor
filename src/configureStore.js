@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import throttle from 'lodash/throttle';
 import rootReducer from './reducers';
 import { loadState, saveState } from './localStorage';
@@ -8,7 +9,12 @@ const configureStore = () => {
   const store = createStore(
     rootReducer,
     persistedState,
-    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f,
+    compose(
+      applyMiddleware(thunk),
+      typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
+        ? window.devToolsExtension()
+        : f => f,
+    ),
   );
 
   store.subscribe(throttle(() => {

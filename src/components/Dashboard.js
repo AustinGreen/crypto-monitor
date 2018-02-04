@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updatePrices } from '../actions';
+import { getPrices } from '../actions';
 import Switch from './shared/Switch';
 
 class Dashboard extends Component {
@@ -12,13 +12,13 @@ class Dashboard extends Component {
       intervalId: null,
     };
 
-    this.fetchPrices = this.fetchPrices.bind(this);
     this.setInterval = this.setInterval.bind(this);
   }
 
   componentDidMount() {
-    this.fetchPrices(this.props.currencyData);
-    const intervalId = setInterval(() => this.fetchPrices(this.props.currencyData), 15000);
+    const { currencyData } = this.props;
+    this.props.getPrices(currencyData);
+    const intervalId = setInterval(() => this.props.getPrices(currencyData), 15000);
     this.setInterval(intervalId);
   }
 
@@ -28,16 +28,6 @@ class Dashboard extends Component {
 
   setInterval(intervalId) {
     this.setState({ intervalId });
-  }
-
-  fetchPrices(currencyData) {
-    const currencyString = currencyData.map(currency => currency.name).join();
-    fetch(`https://min-api.cryptocompare.com/data/price?fsym=USD&tsyms=${currencyString}`)
-      .then(response => response.json())
-      .then((result) => {
-        const pricesUSD = currencyData.map(a => 1 / result[a.name]);
-        this.props.updatePrices(pricesUSD);
-      });
   }
 
   render() {
@@ -70,7 +60,7 @@ Dashboard.propTypes = {
   })).isRequired,
   children: PropTypes.func.isRequired,
   prices: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  updatePrices: PropTypes.func.isRequired,
+  getPrices: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -78,4 +68,4 @@ const mapStateToProps = state => ({
   prices: state.prices,
 });
 
-export default connect(mapStateToProps, { updatePrices })(Dashboard);
+export default connect(mapStateToProps, { getPrices })(Dashboard);

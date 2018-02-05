@@ -8,11 +8,7 @@ const updatePrices = response => ({
 export const getPrices = currencyData => dispatch =>
   fetch(`https://min-api.cryptocompare.com/data/price?fsym=USD&tsyms=${currencyData.map(currency => currency.name).join()}`)
     .then(response => response.json())
-    .then((result) => {
-      const pricesUSD = currencyData.map(crypto => 1 / result[crypto.name]);
-      dispatch(updatePrices(pricesUSD));
-    })
-    .catch(err => err);
+    .then(apiResult => dispatch(updatePrices(currencyData.map(crypto => 1 / apiResult[crypto.name]))), err => err);
 
 export const toggleEdit = () => ({
   type: EDIT_MODE_TOGGLE,
